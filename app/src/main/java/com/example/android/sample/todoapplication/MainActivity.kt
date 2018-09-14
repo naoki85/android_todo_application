@@ -2,10 +2,13 @@ package com.example.android.sample.todoapplication
 
 import android.content.Intent
 import android.os.Bundle
+import android.support.constraint.ConstraintLayout
 import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.ArrayAdapter
+import android.widget.ListView
 
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -15,6 +18,21 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
+
+        val tasks = arrayOf("study", "shopping", "running", "testing")
+
+        // リストをレイアウトから探す
+        val contentMain = findViewById<ConstraintLayout>(R.id.content_main)
+        val listView = contentMain.findViewById<ListView>(R.id.taskList)
+
+        // アダプターを作成
+        val adapter = ArrayAdapter<String>(this,
+                R.layout.list_task_row,
+                R.id.taskRow,
+                tasks)
+
+        // リストにアダプターをセットする
+        listView.adapter = adapter
 
         fab.setOnClickListener { view ->
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
