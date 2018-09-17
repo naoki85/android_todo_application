@@ -3,23 +3,24 @@ package com.example.android.sample.todoapplication
 import android.content.Intent
 import android.os.Bundle
 import android.support.constraint.ConstraintLayout
-import android.support.design.widget.Snackbar
+import android.support.v4.app.DialogFragment
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.ArrayAdapter
+import android.widget.EditText
 import android.widget.ListView
 
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), AddTaskFragment.AddTaskListener {
+
+    val tasks = mutableListOf("study", "shopping", "running", "testing")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
-
-        val tasks = arrayOf("study", "shopping", "running", "testing")
 
         // リストをレイアウトから探す
         val contentMain = findViewById<ConstraintLayout>(R.id.content_main)
@@ -35,8 +36,8 @@ class MainActivity : AppCompatActivity() {
         listView.adapter = adapter
 
         fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show()
+            val addTaskFragment = AddTaskFragment()
+            addTaskFragment.show(supportFragmentManager, "addTask")
         }
     }
 
@@ -62,5 +63,16 @@ class MainActivity : AppCompatActivity() {
                 super.onOptionsItemSelected(item)
             }
         }
+    }
+
+    override fun onDialogPositiveClick(dialog: DialogFragment) {
+        val dialogView = dialog.dialog
+        val taskContent = dialogView.findViewById<EditText>(R.id.addTaskEditText)
+        val newTask = taskContent.text.toString()
+        tasks.add(newTask)
+    }
+
+    override fun onDialogNegativeClick(dialog: DialogFragment) {
+        // User touched the dialog's negative button
     }
 }

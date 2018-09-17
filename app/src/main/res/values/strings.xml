@@ -5,4 +5,8 @@
     <string name="action_settings">Settings</string>
     <string name="about_description">This is a sample of TODO application with Kotlin.</string>
     <string name="settings_description">On this page set up the application</string>
+    <string name="add_task_dialog_title">New Task</string>
+    <string name="enter_new_task_name">Enter new task name</string>
+    <string name="add_task_dialog_positive_button">Add</string>
+    <string name="add_task_dialog_negative_button">Cancel</string>
 </resources>
