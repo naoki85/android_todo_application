@@ -35,6 +35,11 @@ class MainActivity : AppCompatActivity(), AddTaskFragment.AddTaskListener {
         // リストにアダプターをセットする
         listView.adapter = adapter
 
+        listView.setOnItemClickListener { _, _, position, _ ->
+            tasks.removeAt(position)
+            adapter.notifyDataSetChanged()
+        }
+
         fab.setOnClickListener { view ->
             val addTaskFragment = AddTaskFragment()
             addTaskFragment.show(supportFragmentManager, "addTask")
