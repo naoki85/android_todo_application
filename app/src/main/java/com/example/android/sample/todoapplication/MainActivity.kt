@@ -15,8 +15,6 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), AddTaskFragment.AddTaskListener {
 
-    val tasks = mutableListOf("study", "shopping", "running", "testing")
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -25,6 +23,8 @@ class MainActivity : AppCompatActivity(), AddTaskFragment.AddTaskListener {
         // リストをレイアウトから探す
         val contentMain = findViewById<ConstraintLayout>(R.id.content_main)
         val listView = contentMain.findViewById<ListView>(R.id.taskList)
+
+        var tasks = fetchTasks(this)
 
         // アダプターを作成
         val adapter = ArrayAdapter<String>(this,
@@ -74,7 +74,9 @@ class MainActivity : AppCompatActivity(), AddTaskFragment.AddTaskListener {
         val dialogView = dialog.dialog
         val taskContent = dialogView.findViewById<EditText>(R.id.addTaskEditText)
         val newTask = taskContent.text.toString()
-        tasks.add(newTask)
+        insertTasks(this, newTask)
+        finish()
+        startActivity(intent)
     }
 
     override fun onDialogNegativeClick(dialog: DialogFragment) {
