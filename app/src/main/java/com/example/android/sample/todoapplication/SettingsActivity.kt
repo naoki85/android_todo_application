@@ -1,13 +1,15 @@
 package com.example.android.sample.todoapplication
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.support.customtabs.CustomTabsIntent
 import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 
-import kotlinx.android.synthetic.main.activity_about.*
+import kotlinx.android.synthetic.main.activity_settings.*
 
 class SettingsActivity : AppCompatActivity() {
 
@@ -35,9 +37,9 @@ class SettingsActivity : AppCompatActivity() {
                 startActivity(intent)
                 true
             }
-            R.id.action_about -> {
-                val intent = Intent(this, AboutActivity::class.java)
-                startActivity(intent)
+            R.id.action_policy -> {
+                val intent = CustomTabsIntent.Builder().build()
+                intent.launchUrl(this, Uri.parse(getString(R.string.policy_url)))
                 true
             }
             else -> {

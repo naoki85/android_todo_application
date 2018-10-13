@@ -1,8 +1,10 @@
 package com.example.android.sample.todoapplication
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.support.constraint.ConstraintLayout
+import android.support.customtabs.CustomTabsIntent
 import android.support.v4.app.DialogFragment
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
@@ -54,9 +56,9 @@ class MainActivity : AppCompatActivity(), AddTaskFragment.AddTaskListener {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
-            R.id.action_about -> {
-                val intent = Intent(this, AboutActivity::class.java)
-                startActivity(intent)
+            R.id.action_policy -> {
+                val intent = CustomTabsIntent.Builder().build()
+                intent.launchUrl(this, Uri.parse(getString(R.string.policy_url)))
                 true
             }
             R.id.action_settings -> {
